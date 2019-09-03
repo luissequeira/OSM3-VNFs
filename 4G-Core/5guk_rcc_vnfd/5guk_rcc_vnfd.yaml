@@ -1,0 +1,45 @@
+vnfd-catalog:
+    vnfd:
+    -   connection-point:
+        -   name: 5guk_rcc_vnfd/cp0
+            type: VPORT
+        description: 5GUK RCC of the 4G core
+        id: 5guk_rcc_vnfd
+        logo: kcl.png
+        name: 5guk_rcc_vnfd
+        short-name: 5guk_rcc
+        vdu:
+        -   cloud-init-file: cloud_init.cfg
+            count: 1
+            id: rcc_0
+            image: cirros034
+            #image-checksum: 90c3ab851ce5cc6d6f17e0170215f694
+            interface:
+            -   external-connection-point-ref: 5guk_rcc_vnfd/cp0
+                name: eth0
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+            name: rcc_0
+            vm-flavor:
+                memory-mb: 256
+                storage-gb: 2
+                vcpu-count: 1
+        vendor: 5GUK
+        version: '1.0'
+        vnf-configuration:
+            config-template: '
+
+                #!/bin/bash
+
+
+                ./start_5guk_vnf.sh
+
+                '
+            initial-config-primitive:
+            -   name: start_5guk_vnf
+                seq: '1'
+                user-defined-script: start_5guk_vnf.sh
+            script:
+                script-type: bash
+

@@ -1,0 +1,78 @@
+nsd-catalog:
+    nsd:
+    -   constituent-vnfd:
+        -   member-vnf-index: 1
+            vnfd-id-ref: 5guk_hss_vnfd
+        -   member-vnf-index: 2
+            vnfd-id-ref: 5guk_mme_vnfd
+        -   member-vnf-index: 3
+            vnfd-id-ref: 5guk_spgw_vnfd
+        -   member-vnf-index: 4
+            vnfd-id-ref: 5guk_rcc_vnfd
+        description: 5GUK HSS, MME and SPGW  of the 4G core and eNodeB
+        id: 5guk_4g_core_enb_nsd
+        ip-profiles:
+        -   description: IP Profile 1
+            ip-profile-params:
+                gateway-address: 10.31.31.1
+                ip-version: ipv4
+                subnet-address: 10.31.31.0/24
+            name: IpProfile1
+        -   description: IP Profile 2
+            ip-profile-params:
+                gateway-address: 10.31.32.1
+                ip-version: ipv4
+                subnet-address: 10.31.32.0/24
+            name: IpProfile2
+        -   description: IP Profile 3
+            ip-profile-params:
+                gateway-address: 10.31.33.1
+                ip-version: ipv4
+                subnet-address: 10.31.33.0/24
+            name: IpProfile3
+        logo: kcl.png
+        name: 5guk_4g_core_enb_nsd
+        short-name: 5guk_4g_core_enb
+        vendor: 5GUK
+        version: '1.0'
+        vld:
+        -   id: 5guk_epc_network
+            ip-profile-ref: IpProfile1
+            name: 5guk_epc_network
+            type: ELAN
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: 1
+                vnfd-connection-point-ref: 5guk_hss_vnfd/cp0
+                vnfd-id-ref: 5guk_hss_vnfd
+            -   member-vnf-index-ref: 2
+                vnfd-connection-point-ref: 5guk_mme_vnfd/cp0
+                vnfd-id-ref: 5guk_mme_vnfd
+            -   member-vnf-index-ref: 3
+                vnfd-connection-point-ref: 5guk_spgw_vnfd/cp0
+                vnfd-id-ref: 5guk_spgw_vnfd
+            -   member-vnf-index-ref: 4
+                vnfd-connection-point-ref: 5guk_rcc_vnfd/cp0
+                vnfd-id-ref: 5guk_rcc_vnfd
+        -   id: 5guk_ran_network
+            ip-profile-ref: IpProfile2
+            name: 5guk_ran_network
+            type: ELAN
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: 2
+                vnfd-connection-point-ref: 5guk_mme_vnfd/cp1
+                vnfd-id-ref: 5guk_mme_vnfd
+            -   member-vnf-index-ref: 3
+                vnfd-connection-point-ref: 5guk_spgw_vnfd/cp1
+                vnfd-id-ref: 5guk_spgw_vnfd
+            -   member-vnf-index-ref: 4
+                vnfd-connection-point-ref: 5guk_rcc_vnfd/cp0
+                vnfd-id-ref: 5guk_rcc_vnfd
+        -   id: 5guk_ext_network
+            ip-profile-ref: IpProfile3
+            name: 5guk_ext_network
+            type: ELAN
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: 3
+                vnfd-connection-point-ref: 5guk_spgw_vnfd/cp2
+                vnfd-id-ref: 5guk_spgw_vnfd
+

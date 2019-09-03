@@ -1,0 +1,34 @@
+nsd:nsd-catalog:
+    nsd:
+    -   id: 5guk_lb_nsd
+        name: 5guk_lb_ns
+        short-name: 5guk_lb_nsd
+        description: 5GUK Load Balancer
+        vendor: 5GUK
+        version: '1.0'
+        logo: kcl.png
+
+        # Specify the VNFDs that are part of this NSD
+        constituent-vnfd:
+            # The member-vnf-index needs to be unique, starting from 1
+            # vnfd-id-ref is the id of the VNFD
+            # Multiple constituent VNFDs can be specified
+        -   member-vnf-index: 1
+            vnfd-id-ref: 5guk_lb_vnfd
+
+        vld:
+        # Networks for the VNFs
+            -   id: 5guk_lb_nsd_vld1
+                name: 5guk_lb_nsd_vld1
+                short-name: 5guk_lb_nsd_vld1
+                type: ELAN
+                #ip-profile-ref: IpProfile1
+                mgmt-network: 'true'
+                vnfd-connection-point-ref:
+                # Specify the constituent VNFs
+                # member-vnf-index-ref - entry from constituent vnf
+                # vnfd-id-ref - VNFD id
+                # vnfd-connection-point-ref - connection point name in the VNFD
+                -   member-vnf-index-ref: 1
+                    vnfd-id-ref: 5guk_lb_vnfd
+                    vnfd-connection-point-ref: eth0

@@ -1,0 +1,59 @@
+vnfd-catalog:
+    vnfd:
+    -   connection-point:
+        -   name: 5guk_spgw_vnfd/cp0
+            type: VPORT
+        -   name: 5guk_spgw_vnfd/cp1
+            type: VPORT
+        -   name: 5guk_spgw_vnfd/cp2
+            type: VPORT
+        description: 5GUK SPGW of the 4G core
+        id: 5guk_spgw_vnfd
+        logo: kcl.png
+        name: 5guk_spgw_vnfd
+        short-name: 5guk_spgw
+        vdu:
+        -   cloud-init-file: cloud_init.cfg
+            count: 1
+            id: spgw_0
+            image: cirros034
+            #image-checksum: 36f21cb685ac2ccc17ad500830450199
+            interface:
+            -   external-connection-point-ref: 5guk_spgw_vnfd/cp0
+                name: eth0
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+            -   external-connection-point-ref: 5guk_spgw_vnfd/cp1
+                name: eth1
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+            -   external-connection-point-ref: 5guk_spgw_vnfd/cp2
+                name: eth2
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+            name: spgw_0
+            vm-flavor:
+                memory-mb: 256
+                storage-gb: 2
+                vcpu-count: 1
+        vendor: 5GUK
+        version: '1.0'
+        vnf-configuration:
+            config-template: '
+
+                #!/bin/bash
+
+
+                ./start_5guk_vnf.sh
+
+                '
+            initial-config-primitive:
+            -   name: start_5guk_vnf
+                seq: '1'
+                user-defined-script: start_5guk_vnf.sh
+            script:
+                script-type: bash
+

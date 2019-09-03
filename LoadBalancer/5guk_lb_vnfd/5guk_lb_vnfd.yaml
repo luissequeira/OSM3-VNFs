@@ -1,0 +1,48 @@
+vnfd:vnfd-catalog:
+    vnfd:
+    -   id: 5guk_lb_vnfd
+        name: 5guk_lb_vnf
+        short-name: 5guk_lb
+        description: 5GUK Load Balancer
+        vendor: 5GUK
+        version: '1.0'
+        logo: kcl.png
+        
+        # Management interface
+        mgmt-interface:
+            cp: eth0
+        
+        # At least one VDU need to be specified
+        vdu:
+        -   id: lb_vnfd_vm
+            name: lb_vnfd_vm
+            description: lb_vnfd_vm
+            count: 1
+
+            # Flavour of the VM to be instantiated for the VDU
+            vm-flavor:
+                vcpu-count: 4
+                memory-mb: 4096
+                storage-gb: 10
+
+            # Image including the full path
+            image: loadbalancer
+            #checksum: 096aadddbcd9b64580be82d861c2fc70
+
+            # Cloud init file
+            #cloud-init-file: cloud_init.cfg
+            
+            # Specify the external interfaces
+            # There can be multiple interfaces defined
+            interface:
+            -   name: eth0
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+                    bandwidth: '0'
+                    vpci: 0000:00:0a.0
+                external-connection-point-ref: eth0
+
+        connection-point:
+            -   name: eth0
+                type: VPORT

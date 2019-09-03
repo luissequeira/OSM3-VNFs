@@ -1,0 +1,45 @@
+vnfd-catalog:
+    vnfd:
+    -   connection-point:
+        -   name: 5guk_hss_vnfd/cp0
+            type: VPORT
+        description: 5GUK HSS of the 4G core
+        id: 5guk_hss_vnfd
+        logo: kcl.png
+        name: 5guk_hss_vnfd
+        short-name: 5guk_hss
+        vdu:
+        -   cloud-init-file: cloud_init.cfg
+            count: 1
+            id: hss_0
+            image: cirros034
+            #image-checksum: b7aa42f0d5bd6d54c8f2148834368cab
+            interface:
+            -   external-connection-point-ref: 5guk_hss_vnfd/cp0
+                name: eth0
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+            name: hss_0
+            vm-flavor:
+                memory-mb: 256
+                storage-gb: 2
+                vcpu-count: 1
+        vendor: 5GUK
+        version: '1.0'
+        vnf-configuration:
+            config-template: '
+
+                #!/bin/bash
+
+
+                ./start_5guk_vnf.sh
+
+                '
+            initial-config-primitive:
+            -   name: start_5guk_vnf
+                seq: '1'
+                user-defined-script: start_5guk_vnf.sh
+            script:
+                script-type: bash
+
